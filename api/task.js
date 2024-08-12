@@ -7,7 +7,7 @@ import {
   DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
 import crypto from "crypto";
-const client = new DynamoDBClient({ region: "us-west-1" });
+const client = new DynamoDBClient({ region: "us-east-2" });
 const docClient = DynamoDBDocumentClient.from(client);
 
 export const fetchTasks = async () => {
