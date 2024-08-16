@@ -1,40 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import AddTaskForm from './components/AddTaskForm';
-import Task from './components/Task';
-import axios from "axios";
-import { API_URL } from "./utils";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "./components/Register";
+import Home from "./components/Home";
+import Login from "./components/Login";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
-export default function App() {
-  const [tasks, setTasks] = useState([]);
-
-  const fetchTasks = async () => {
-    try {
-      const { data } = await axios.get(API_URL);
-
-      setTasks(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+function App() {
+  const currentUser = true;
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <AddTaskForm fetchTasks={fetchTasks} />
-      {tasks.map((task) => (
-        <Task task={task} key={task.id} fetchTasks={fetchTasks} />
-      ))}
-    </ThemeProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/register" element={<Register/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        </Routes>
+    </Router>
   );
 }
+
+export default App;
